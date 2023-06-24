@@ -36,7 +36,7 @@ const Order = () => {
 
   const fetchDrinks = async () => {
     try {
-      const response = await axios.get("https://final1-repo.vercel.app/api/drink");
+      const response = await axios.get("https://db-api-gold.vercel.app/drink");
       const data = response.data;
       setDrinks(data);
     } catch (error) {
@@ -94,7 +94,7 @@ const Order = () => {
       for (const detail of orderDetails) {
         if (detail.Drink && detail.Price && detail.Qty) {
           const orderDetailsResponse = await axios.post(
-            "http://final1-repo.vercel.app/api/orderDetail",
+            "https://db-api-gold.vercel.app/orderDetail",
             detail
           );
 
@@ -106,7 +106,7 @@ const Order = () => {
       // Create order
       const updatedOrder = { ...order, OrderList: detailIds };
       const orderResponse = await axios.post(
-        "https://final1-repo.vercel.app/api/order",
+        "https://db-api-gold.vercel.app/order",
         updatedOrder
       );
 
