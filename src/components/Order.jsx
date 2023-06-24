@@ -36,7 +36,7 @@ const Order = () => {
 
   const fetchDrinks = async () => {
     try {
-      const response = await axios.get("https://db-api-5yux.onrender.com/api/drink");
+      const response = await axios.get("http://localhost:4000/api/drink");
       const data = response.data;
       setDrinks(data);
     } catch (error) {
@@ -94,7 +94,7 @@ const Order = () => {
       for (const detail of orderDetails) {
         if (detail.Drink && detail.Price && detail.Qty) {
           const orderDetailsResponse = await axios.post(
-            "https://db-api-5yux.onrender.com/api/orderDetail",
+            "http://localhost:4000/api/orderDetail",
             detail
           );
 
@@ -106,7 +106,7 @@ const Order = () => {
       // Create order
       const updatedOrder = { ...order, OrderList: detailIds };
       const orderResponse = await axios.post(
-        "https://db-api-5yux.onrender.com/api/order",
+        "http://localhost:4000/api/order",
         updatedOrder
       );
 
