@@ -146,7 +146,7 @@ const Order = () => {
                     {orderDetails.map((detail, index) => (
                       <tr key={index}>
                         <td className="d-flex center text-center">
-                          <h3 className="stt">{index + 1}</h3>
+                          <h5 className="stt">{index + 1}</h5>
                         </td>
                         <td>
                           <select
