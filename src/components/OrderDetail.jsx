@@ -18,7 +18,7 @@ const OrderDetail = (props) => {
     try {
       for (let detailId of orderList) {
         const response = await axios.get(
-          `http://localhost:4000/api/orderDetail/${detailId}`
+          `https://db-api-5yux.onrender.com/orderDetail/${detailId}`
         );
         const data = response.data;
         details.push(data);

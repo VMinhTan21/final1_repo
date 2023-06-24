@@ -20,7 +20,7 @@ const ViewOrder = () => {
 
   const fetchDrinks = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/api/drink");
+      const response = await axios.get("https://db-api-5yux.onrender.com/drink");
       const data = response.data;
       setDrinks(data);
     } catch (error) {
@@ -30,7 +30,7 @@ const ViewOrder = () => {
 
   const fetchOrders = async () => {
     try {
-      await axios.get("http://localhost:4000/api/order").then((response) => {
+      await axios.get("https://db-api-5yux.onrender.com/order").then((response) => {
         const data = response.data;
         setOrders(data);
       });
