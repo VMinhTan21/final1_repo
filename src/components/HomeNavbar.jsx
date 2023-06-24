@@ -5,15 +5,13 @@ class HomeNavbar extends Component {
     return (
       <Container>
         <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
-          <Navbar.Brand href="#home">React ROS Robot</Navbar.Brand>
+          <Navbar.Brand href="#home">COFFEE ROS ROBOT</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/about">About</Nav.Link>
-              <Nav.Link href="/testDataBase">Database</Nav.Link>
-              <Nav.Link href="/newOrder">New Order</Nav.Link>
-              <Nav.Link href="/newDrink">New Drink</Nav.Link>
+              <Nav.Link href="/">HOME</Nav.Link>
+              <Nav.Link href="/testDataBase">LIST ORDER</Nav.Link>
+              <Nav.Link href="/newDrink">NEW REFRESHMENT</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>

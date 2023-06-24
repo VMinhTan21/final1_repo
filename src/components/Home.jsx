@@ -7,22 +7,28 @@ import SetGoal_1 from "./SetGoal_1";
 import SetGoal_2 from "./SetGoal_2";
 import HomeNavbar from "./HomeNavbar";
 
-import { Row, Col, Container, Button } from "react-bootstrap";
-
-import { Server, Socket } from 'socket.io'
-import { createServer } from 'http'
+import { Row, Col, Container } from "react-bootstrap";
+import { ToastContainer, toast } from "react-toastify";
 
 class Home extends Component {
-  state = {};
+  componentDidMount() {
+    const channel = new BroadcastChannel("6B29FC40-CA47-1067-B31D-00DD010662DA");
 
-  constructor() {
-    super()
+    const handleMessage = (event) => {
+      toast.success("NEW ORDER FROM CLIENT", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    };
 
-    this.initWebSocket = this.initWebSocket(this)
+    channel.addEventListener("message", handleMessage);
+
+    this.channel = channel;
   }
 
-  initWebSocket() {
-    
+  componentWillUnmount() {
+    if (this.channel) {
+      this.channel.removeEventListener("message", this.handleMessage);
+    }
   }
 
   render() {
@@ -30,7 +36,6 @@ class Home extends Component {
       <div>
         <HomeNavbar />
         <Container>
-          <h1 className="text-center mt-3">Robot Control Page</h1>
           <Row>
             <Col>
               <Connection />
@@ -44,15 +49,15 @@ class Home extends Component {
             </Col>
           </Row>
           <Row>
-            {" "}
             <Col>
               <RobotState />
             </Col>
             <Col>
               <h1>MAP</h1>
-              <Map></Map>
+              <Map />
             </Col>
           </Row>
+          <ToastContainer />
         </Container>
       </div>
     );

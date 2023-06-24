@@ -16,9 +16,7 @@ class Header extends Component {
       //     </Navbar.Collapse>
       //   </Navbar>
       // </Container>
-      <div>
-        COFFEE ROBOT
-      </div>
+      <div></div>
     );
   }
 }

@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col, Container, Button, Form, Table } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
+import { useHistory } from "react-router-dom";
+
 const Order = () => {
-
-
   const history = useHistory();
   const defaultOrder = {
     Date: new Date().toLocaleDateString("en-GB"),
@@ -27,7 +26,7 @@ const Order = () => {
 
   useEffect(() => {
     calculateTotalPrice();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orderDetails]);
 
   const btnAddRow_onclick = () => {
@@ -66,7 +65,7 @@ const Order = () => {
     updatedOrderDetails[index] = {
       ...updatedOrderDetails[index],
       Drink: value,
-      Price: drink?drink.DrinkPrice:0
+      Price: drink ? drink.DrinkPrice : 0,
     };
     setOrderDetails(updatedOrderDetails);
   };
@@ -87,7 +86,7 @@ const Order = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    try {
+      try {
       // Create order details
       const detailIds = [];
 
@@ -99,7 +98,10 @@ const Order = () => {
           );
 
           detailIds.push(orderDetailsResponse.data._id);
-          console.log("New order detail created:", orderDetailsResponse.statusText);
+          console.log(
+            "New order detail created:",
+            orderDetailsResponse.statusText
+          );
         }
       }
 
@@ -112,10 +114,10 @@ const Order = () => {
 
       // Navigation and toast
       if (orderResponse.status === 201) {
-        toast.success("Order created successfully!", {
-          position: toast.POSITION.TOP_RIGHT,
-        });
-        history.push("/");
+        const channel = new BroadcastChannel("6B29FC40-CA47-1067-B31D-00DD010662DA");
+        channel.postMessage("Tạo Order thành công!");
+
+        history.push('/orderSuccess')
       } else {
         console.log(orderResponse.status);
       }
@@ -153,9 +155,11 @@ const Order = () => {
                               handleDrinkChange(event, index)
                             }
                           >
-                            <option key={0} value={0}>Chọn món</option>
+                            <option key={0} value={0}>
+                              Chọn món
+                            </option>
                             {drinks.map((drink, index) => (
-                              <option key={index+1} value={drink._id}>
+                              <option key={index + 1} value={drink._id}>
                                 {drink.DrinkName}
                               </option>
                             ))}
@@ -204,6 +208,7 @@ const Order = () => {
           </Row>
         </Container>
       </Form>
+      <ToastContainer/>
     </div>
   );
 };

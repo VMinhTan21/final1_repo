@@ -19,7 +19,7 @@ const Drink = () => {
     try {
       const newDrink = { DrinkName: drinkName, DrinkPrice: drinkPrice };
       const response = await axios.post(
-        "http://localhost:4000/api/drink",
+        "https://db-api-5yux.onrender.com/drink",
         newDrink
       );
       console.log("New drink created:", response.data);

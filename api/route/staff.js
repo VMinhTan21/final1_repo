@@ -1,7 +1,7 @@
 const express = require('express');
 const staffRoutes = express.Router();
 
-const staff = require('../models/Staff.js');
+const staff = require('../models/staff.js');
 
 // GET - Get all staffs from MongoDB
 staffRoutes.route('/').get(async (req, res) => {

@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { Container } from "react-bootstrap";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import Home from "./Home";
 import About from "./About";
 import TestDataBase from "./TestDataBase";
 import Order from "./Order";
 import Drink from "./Drink";
+import OrderSuccess from "./OrderSuccess";
 
 class Body extends Component {
   render() {
@@ -19,9 +19,9 @@ class Body extends Component {
             <Route path="/testDataBase" exact component={TestDataBase}></Route>
             <Route path="/newOrder" exact component={Order}></Route>
             <Route path="/newDrink" exact component={Drink}></Route>
+            <Route path="/orderSuccess" exact component={OrderSuccess}></Route>
           </Switch>
         </Router>
-        <ToastContainer/>
       </Container>
     );
   }

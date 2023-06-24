@@ -50,7 +50,6 @@ const ViewOrder = () => {
 
   return (
     <div>
-      <h4>Table: Order</h4>
       <Table striped borderless hover responsive size="sm">
         <thead>
           <tr>

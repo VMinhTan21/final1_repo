@@ -8,7 +8,7 @@ const OrderDetail = (props) => {
 
   useEffect(() => {
     fetchOrderDetails();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchOrderDetails = async () => {
@@ -33,7 +33,8 @@ const OrderDetail = (props) => {
   return (
     <div>
       <h4>Table: Order Detail</h4>
-      <br/>
+      <br />
+      <div>Total: {order.Total}</div>
       <Table striped borderless hover responsive size="sm">
         <thead>
           <tr>
@@ -47,14 +48,18 @@ const OrderDetail = (props) => {
           {orderDetails.map((order, index) => {
             const drink = drinks.find((d) => d._id === order.Drink);
             return (
-              <tr key={order._id}>
-                <td>{index + 1}</td>
-                <td>{drink ? drink.DrinkName : ""}</td>
-                <td>{drink ? drink.DrinkPrice : 0}</td>
-                <td>{order.Qty}</td>
-              </tr>
+                <tr key={order._id}>
+                  <td>{index + 1}</td>
+                  <td>{drink ? drink.DrinkName : ""}</td>
+                  <td>{drink ? drink.DrinkPrice : 0}</td>
+                  <td>{order.Qty}</td>
+                </tr>
             );
           })}
+          <div>
+            <div>NOTE: </div>
+            {order.Note}
+          </div>
         </tbody>
       </Table>
     </div>
