@@ -12,6 +12,18 @@ import { ToastContainer, toast } from "react-toastify";
 
 class Home extends Component {
   componentDidMount() {
+    const server = new WebSocket('wss://localhost:3000')
+    // server.addEventListener("open", (event) => {
+    //   console.log('WEBSOCKET OPENED')
+    // })
+    server.onopen = (event) => {
+      console.log("WS EVENT EMIT")
+    }
+    
+    server.onmessage = (message) => {
+      console.log("NEW MESSAGE", message)
+    }
+    
     const channel = new BroadcastChannel("6B29FC40-CA47-1067-B31D-00DD010662DA");
 
     const handleMessage = (event) => {
