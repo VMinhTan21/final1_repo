@@ -3,6 +3,8 @@ import { Row, Col, Container, Button } from "react-bootstrap";
 import Config from "../scripts/config";
 import * as Three from "three";
 
+import { toast } from "react-toastify"
+
 class RobotState extends Component {
   state = {
     ros: null,
@@ -36,10 +38,10 @@ class RobotState extends Component {
         try {
           this.state.ros.connect(
             "ws://" +
-              Config.ROSBRIDGE_SERVER_IP +
-              ":" +
-              Config.ROSBRIDGE_SERVER_PORT +
-              ""
+            Config.ROSBRIDGE_SERVER_IP +
+            ":" +
+            Config.ROSBRIDGE_SERVER_PORT +
+            ""
           );
         } catch (error) {
           console.log("connection problem ");
@@ -50,18 +52,18 @@ class RobotState extends Component {
     try {
       this.state.ros.connect(
         "ws://" +
-          Config.ROSBRIDGE_SERVER_IP +
-          ":" +
-          Config.ROSBRIDGE_SERVER_PORT +
-          ""
+        Config.ROSBRIDGE_SERVER_IP +
+        ":" +
+        Config.ROSBRIDGE_SERVER_PORT +
+        ""
       );
     } catch (error) {
       console.log(
         "ws://" +
-          Config.ROSBRIDGE_SERVER_IP +
-          ":" +
-          Config.ROSBRIDGE_SERVER_PORT +
-          ""
+        Config.ROSBRIDGE_SERVER_IP +
+        ":" +
+        Config.ROSBRIDGE_SERVER_PORT +
+        ""
       );
       console.log("connection problem ");
     }
@@ -69,6 +71,7 @@ class RobotState extends Component {
 
   componentDidMount() {
     this.getRobotState();
+    this.getState()
   }
 
   getRobotState() {
@@ -120,28 +123,39 @@ class RobotState extends Component {
 
     return RPY["_z"] * (180 / Math.PI);
   }
+
+  getState() {
+    var status = new window.ROSLIB.Topic({
+      ros: this.state.ros,
+      name: 'move_base/result',
+      messageType: "move_base_msgs/MoveBaseActionResult"
+    })
+
+    status.subscribe((message) => {
+      console.log(message)
+      toast.success("GOAL TABLE REACHED", {
+        position: toast.POSITION.TOP_CENTER
+      })
+    })
+  }
+
   render() {
     return (
-      <div>
-        <Row>
-          <Col>
-            <h4 className="mt-4">Position</h4>
-            <p className="mt-0">x: {this.state.x}</p>
-            <p className="mt-0">y: {this.state.y}</p>
-            <p className="mt-0">Orientation: {this.state.orientation}</p>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <h4 className="mt-4">Velocities</h4>
-            <p className="mt-0">
-              Linear Velocity: {this.state.linear_velocity}
-            </p>
-            <p className="mt-0">
-              Angular Velocity: {this.state.angular_velocity}
-            </p>
-          </Col>
-        </Row>
+      <div style={{
+        marginLeft: "5%"
+      }}>
+        <h4>Position</h4>
+        <p className="mt-0">x: {this.state.x}</p>
+        <p className="mt-0">y: {this.state.y}</p>
+        <p className="mt-0">Orientation: {this.state.orientation}</p>
+
+        <h4 className="mt-4">Velocities</h4>
+        <p className="mt-0">
+          Linear Velocity: {this.state.linear_velocity}
+        </p>
+        <p className="mt-0">
+          Angular Velocity: {this.state.angular_velocity}
+        </p>
       </div>
     );
   }

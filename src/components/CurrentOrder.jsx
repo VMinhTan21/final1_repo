@@ -51,44 +51,53 @@ const CurrentOrder = () => {
 
     const cusStyle = {
         position: "relative",
-        top: "50%",
-        right: "0%",
-        transform: "translate(0, -50%)"
+        float: "right"
     }
 
     return (
         <div style={{ cusStyle }}>
-            <Table striped borderless hover responsive size="md">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Drink</th>
-                        <th>Price</th>
-                        <th>Qty</th>
-                    </tr>
-                </thead>
-                <tbody id="orders_table">
-                    {orderDetails.map((order, index) => {
-                        const drink = drinks.find((d) => d._id === order.Drink)
-                        return (
-                            <tr key={order._id}>
-                                <td>{index + 1}</td>
-                                <td>{drink ? drink.DrinkName : ""}</td>
-                                <td>{drink ? drink.DrinkPrice : 0}</td>
-                                <td>{order.Qty}</td>
+            <Card bg="warning" text="primary" style={{marginTop: "3%"}}>
+                <Card.Body>
+                    <h5 style={{
+                        marginTop: "3%",
+                        marginBottom: "5%"
+                    }}>TABLE 1</h5>
+                    <h6 style={{
+                        marginBottom: "0",
+                        marginTop: "3%"
+                    }}>List drinks of order</h6>
+                    <Table striped borderless hover responsive size="md">
+                        <thead>
+                            <tr>
+                                <th><h6>#</h6></th>
+                                <th><h6>Drink</h6></th>
+                                <th><h6>Price</h6></th>
+                                <th><h6>Price</h6></th>
                             </tr>
-                        )
-                    })}
-                    <tr>
-                        <td colSpan={2}>Note: {orders.Note}</td>
-                        <td colSpan={2}>Total: {orders.Total}</td>
-                    </tr>
-                    <tr>
+                        </thead>
+                        <tbody id="orders_table">
+                            {orderDetails.map((order, index) => {
+                                const drink = drinks.find((d) => d._id === order.Drink)
+                                return (
+                                    <tr key={order._id}>
+                                        <td><h6>{index + 1}</h6></td>
+                                        <td><h6>{drink ? drink.DrinkName : ""}</h6></td>
+                                        <td><h6>{drink ? drink.DrinkPrice : 0}</h6></td>
+                                        <td><h6>{order.Qty}</h6></td>
+                                    </tr>
+                                )
+                            })}
+                            <tr>
+                                <td colSpan={2}><h6>Note: {orders.Note}</h6></td>
+                                <td colSpan={2}><h6>Total: {orders.Total}</h6></td>
+                            </tr>
+                            {/* <tr>
                         <Button variant="success">DELIVER</Button>
-                    </tr>
-                </tbody>
-            </Table>
-
+                    </tr> */}
+                        </tbody>
+                    </Table>
+                </Card.Body>
+            </Card>
         </div>
     )
 }

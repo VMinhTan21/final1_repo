@@ -5,6 +5,10 @@ import Teleoperation from "./Teleoperation";
 import Map from "./Map";
 import SetGoal_1 from "./SetGoal_1";
 import SetGoal_2 from "./SetGoal_2";
+import SetGoal_3 from "./SetGoal_3";
+import SetGoal_4 from "./SetGoal_4";
+import SetGoal_5 from "./SetGoal_5";
+
 import HomeNavbar from "./HomeNavbar";
 import ViewOrder from "./ViewOrder";
 import CurrentOrder from "./CurrentOrder";
@@ -29,7 +33,7 @@ class Home extends Component {
     const channel = new BroadcastChannel("6B29FC40-CA47-1067-B31D-00DD010662DA");
 
     const handleMessage = (event) => {
-      toast.success("NEW ORDER FROM CLIENT", {
+      toast.success("NEW ORDER FROM CLIENT! REFRESH IF YOU WANNA DELIVER THIS", {
         position: toast.POSITION.TOP_RIGHT,
       });
     };
@@ -48,8 +52,7 @@ class Home extends Component {
   render() {
     const cusStyle = {
       position: "relative",
-      left: "50%",
-      transform: "translateX(-50%)"
+      float: "right"
     }
     return (
       <div>
@@ -57,37 +60,46 @@ class Home extends Component {
         <Container>
           <Row>
             <Col>
-              <Connection />
-              <Row className="m-3">
+              <div className="text-center"
+                style={
+                  {
+                    marginTop: "8%"
+                  }
+                }>
+                <h4>
+                  ROBOT CONTROLS
+                </h4>
+              </div>
+              <Row style={{ marginTop: "5%" }}>
                 <Col>
                   <SetGoal_2 />
                 </Col>
                 <Col>
-                  <SetGoal_2 />
+                  <SetGoal_3 />
                 </Col>
                 <Col>
-                  <SetGoal_2 />
+                  <SetGoal_4 />
+                </Col>
+                <Col>
+                  <SetGoal_5 />
                 </Col>
               </Row>
-              <Row className="m-3">
+              <Row>
                 <Col>
-                  <Row>
-                    <h5 className="mt-4">Manual Control</h5>
-                  </Row>
-                  <Row style={{ position: "relative", top: "10%" }}>
-                    <SetGoal_1 />
-                  </Row>
-                  <div style={{ top: "20%", position: "relative" }}>
-                    <Teleoperation />
-                  </div>
+                  <SetGoal_1 />
                 </Col>
                 <Col>
-                  <RobotState />
+                  <Connection />
                 </Col>
               </Row>
             </Col>
             <Col>
-              <div className="text-center m-4" >
+              <div className="text-center"
+                style={
+                  {
+                    marginTop: "8%"
+                  }
+                }>
                 <h4>
                   CURRENTLY ORDER
                 </h4>
@@ -97,17 +109,26 @@ class Home extends Component {
                   <CurrentOrder />
                 </div>
               </Row>
-              {/* <Row>
-                <h3>MAP</h3>
-                <Map />
-              </Row> */}
             </Col>
           </Row>
-          <div style={{position: 'relative', left: '10%'}}>
-            <h3>MAP</h3>
-            <Map />
-          </div>
 
+          <Row>
+            <Col sm={4}>
+              <Row>
+                <RobotState />
+              </Row>
+              <Row>
+                <div style={{ top: "30%", position: "relative", left: "5%" }}>
+                  <h4>CONTROL</h4>
+                  <Teleoperation />
+                </div>
+              </Row>
+            </Col>
+            <Col sm={8}>
+              <h4>MAP</h4>
+              <Map />
+            </Col>
+          </Row>
           <ToastContainer />
         </Container>
       </div>
