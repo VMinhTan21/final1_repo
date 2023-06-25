@@ -83,10 +83,16 @@ class SetGoal_1 extends Component {
     }
 
     render() {
+        const cusStyle = {
+            position: "relative",
+            top: "50%",
+            right: "0%",
+            transform: "translate(0, -50%)"
+        }
         return (
             <div>
-                <Button onClick={this.sendCommand}>
-                    SET GOAL 1
+                <Button onClick={this.sendCommand} variant="info">
+                    ROBOT RETURN
                 </Button>
             </div>
         )

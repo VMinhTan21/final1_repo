@@ -60,7 +60,7 @@ class Map extends Component {
   render() {
     return (
       <div>
-        <div id="nav_div">Viewer</div>
+        <div id="nav_div"></div>
       </div>
     );
   }

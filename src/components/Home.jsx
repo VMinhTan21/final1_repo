@@ -6,8 +6,10 @@ import Map from "./Map";
 import SetGoal_1 from "./SetGoal_1";
 import SetGoal_2 from "./SetGoal_2";
 import HomeNavbar from "./HomeNavbar";
+import ViewOrder from "./ViewOrder";
+import CurrentOrder from "./CurrentOrder";
 
-import { Row, Col, Container } from "react-bootstrap";
+import { Row, Col, Container, Card } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
 
 class Home extends Component {
@@ -19,11 +21,11 @@ class Home extends Component {
     server.onopen = (event) => {
       console.log("WS EVENT EMIT")
     }
-    
+
     server.onmessage = (message) => {
       console.log("NEW MESSAGE", message)
     }
-    
+
     const channel = new BroadcastChannel("6B29FC40-CA47-1067-B31D-00DD010662DA");
 
     const handleMessage = (event) => {
@@ -44,6 +46,11 @@ class Home extends Component {
   }
 
   render() {
+    const cusStyle = {
+      position: "relative",
+      left: "50%",
+      transform: "translateX(-50%)"
+    }
     return (
       <div>
         <HomeNavbar />
@@ -51,24 +58,56 @@ class Home extends Component {
           <Row>
             <Col>
               <Connection />
+              <Row className="m-3">
+                <Col>
+                  <SetGoal_2 />
+                </Col>
+                <Col>
+                  <SetGoal_2 />
+                </Col>
+                <Col>
+                  <SetGoal_2 />
+                </Col>
+              </Row>
+              <Row className="m-3">
+                <Col>
+                  <Row>
+                    <h5 className="mt-4">Manual Control</h5>
+                  </Row>
+                  <Row style={{ position: "relative", top: "10%" }}>
+                    <SetGoal_1 />
+                  </Row>
+                  <div style={{ top: "20%", position: "relative" }}>
+                    <Teleoperation />
+                  </div>
+                </Col>
+                <Col>
+                  <RobotState />
+                </Col>
+              </Row>
+            </Col>
+            <Col>
+              <div className="text-center m-4" >
+                <h4>
+                  CURRENTLY ORDER
+                </h4>
+              </div>
+              <Row>
+                <div style={cusStyle}>
+                  <CurrentOrder />
+                </div>
+              </Row>
+              {/* <Row>
+                <h3>MAP</h3>
+                <Map />
+              </Row> */}
             </Col>
           </Row>
-          <Row>
-            <Col>
-              <Teleoperation />
-              <SetGoal_1 />
-              <SetGoal_2 />
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <RobotState />
-            </Col>
-            <Col>
-              <h1>MAP</h1>
-              <Map />
-            </Col>
-          </Row>
+          <div style={{position: 'relative', left: '10%'}}>
+            <h3>MAP</h3>
+            <Map />
+          </div>
+
           <ToastContainer />
         </Container>
       </div>

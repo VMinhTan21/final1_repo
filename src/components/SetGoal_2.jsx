@@ -118,8 +118,8 @@ class SetGoal_2 extends Component {
     render() {
         return (
             <div>
-                <Button onClick={this.sendCommand}>
-                    SET GOAL 2
+                <Button onClick={this.sendCommand} variant="success">
+                    TABLE 1
                 </Button>
             </div>
         )

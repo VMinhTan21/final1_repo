@@ -61,7 +61,7 @@ class Connection extends Component {
     return (
       <div>
         <Alert
-          className="text-center m-3"
+          className="text-center m-4"
           variant={this.state.connected ? "success" : "danger"}
         >
           {this.state.connected ? "Robot Connected" : "Robot Disconnected"}
