@@ -6,8 +6,8 @@ import axios from "axios";
 
 import { useHistory } from "react-router-dom";
 
-const Order = () => {
-  const client = new WebSocket("ws://localhost:3000")
+const Order = (req, res) => {
+
   const history = useHistory();
   const defaultOrder = {
     Date: new Date().toLocaleDateString("en-GB"),
@@ -117,7 +117,7 @@ const Order = () => {
       if (orderResponse.status === 201) {
         const channel = new BroadcastChannel("6B29FC40-CA47-1067-B31D-00DD010662DA");
         channel.postMessage("Tạo Order thành công!");
-        client.onopen = () => client.send("NEW ORDER FROM CLIENT")
+
         history.push('/orderSuccess')
       } else {
         console.log(orderResponse.status);
