@@ -55,8 +55,8 @@ const CurrentOrder = () => {
     }
 
     return (
-        <div style={{ cusStyle }}>
-            <Card bg="warning" text="primary" style={{marginTop: "3%"}}>
+        <div>
+            <Card bg="warning" text="primary" style={{marginTop: "3%", right: "3%"}}>
                 <Card.Body>
                     <h5 style={{
                         marginTop: "3%",

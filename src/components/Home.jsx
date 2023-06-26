@@ -104,8 +104,8 @@ class Home extends Component {
                   CURRENTLY ORDER
                 </h4>
               </div>
-              <Row>
-                <div style={cusStyle}>
+              <Row style={cusStyle}>
+                <div>
                   <CurrentOrder />
                 </div>
               </Row>
