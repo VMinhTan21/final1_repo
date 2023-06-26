@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Row, Col, Container, Button } from "react-bootstrap";
+import { toast } from "react-toastify"
 
-import Config from "../scripts/config";
+import Config from "../scripts/config"
 
-class SetGoal_1 extends Component {
+class SetGoal_3 extends Component {
     state = { ros: null }
-
     constructor() {
         super()
 
@@ -13,6 +13,7 @@ class SetGoal_1 extends Component {
 
         this.sendCommand = this.sendCommand.bind(this)
     }
+
 
     init_connection() {
         this.state.ros = new window.ROSLIB.Ros()
@@ -32,8 +33,7 @@ class SetGoal_1 extends Component {
                 ""
             )
 
-
-            console.log("SetGoal_1 - Connected")
+            console.log("SetGoal_3 - Connected")
         } catch (error) {
             console.log(
                 "ws://" +
@@ -42,12 +42,12 @@ class SetGoal_1 extends Component {
                 Config.ROSBRIDGE_SERVER_PORT +
                 ""
             )
-            console.log("SetGoal_1 - cannot connect to the WS robot. Try again after 1 second");
+            console.log("SetGoal_3 - cannot connect to the WS robot. Try again after 1 second");
         }
     }
 
     sendCommand(event) {
-        console.log("SetGoal_1 sent command")
+        console.log("SetGoal_3 sent command")
         console.log(this.state.ros)
 
         const goal = new window.ROSLIB.Goal({
@@ -63,8 +63,8 @@ class SetGoal_1 extends Component {
                     },
                     pose: {
                         position: {
-                            x: 0.5,  // Replace with the desired position
-                            y: 0.0,
+                            x: -2.0,  // Replace with the desired position
+                            y: 1.0,
                             z: 0.0
                         },
                         orientation: {
@@ -79,25 +79,18 @@ class SetGoal_1 extends Component {
         });
 
         goal.send();
-        console.log('Goal 1 sent!');
+        console.log('Goal 3 sent!');
     }
 
     render() {
         return (
-            <div style={{
-                marginTop: "10%"
-            }}>
-                <Button onClick={this.sendCommand} variant="info"
-                    style={
-                        { width: "95%" }
-                    }>
-
-                    ROBOT RETURN
-
+            <div>
+                <Button onClick={this.sendCommand} variant="success">
+                    TABLE 2
                 </Button>
             </div>
         )
     }
 }
 
-export default SetGoal_1
+export default SetGoal_3

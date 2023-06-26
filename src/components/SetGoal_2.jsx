@@ -2,9 +2,12 @@ import React, { Component } from "react";
 import { Row, Col, Container, Button } from "react-bootstrap";
 
 import Config from "../scripts/config"
+import { toast } from "react-toastify";
 
 class SetGoal_2 extends Component {
-    state = { ros: null }
+    state = { ros: null,
+                x: 0,
+                y: 0 }
     constructor() {
         super()
 
@@ -15,8 +18,8 @@ class SetGoal_2 extends Component {
 
 
     init_connection() {
-        this.state.ros  =  new window.ROSLIB.Ros()
-        this.state.ros.on('connection', (e)=> {
+        this.state.ros = new window.ROSLIB.Ros()
+        this.state.ros.on('connection', (e) => {
             console.log(e)
             this.setState({
                 ros: this.state.ros
@@ -31,8 +34,8 @@ class SetGoal_2 extends Component {
                 Config.ROSBRIDGE_SERVER_PORT +
                 ""
             )
-        
-            
+
+
             console.log("SetGoal_2 - Connected")
         } catch (error) {
             console.log(
@@ -50,39 +53,6 @@ class SetGoal_2 extends Component {
         console.log("SetGoal_2 sent command")
         console.log(this.state.ros)
 
-        // var cmdService = new window.ROSLIB.Service({
-        //     ros: this.state.ros,
-        //     name: '/setgoal/setgoal',
-        //     serviceType: 'setgoal/msgs'
-        // })
-
-        // var cmdService_test = new window.ROSLIB.Service({
-        //     ros: this.state.ros,
-        //     name: '/map_server',
-        //     serviceType: 'map_server/map_server'
-        // })
-
-        // var request = new window.ROSLIB.ServiceRequest({
-        //     package_name: 'map_server',
-        //     launch_file: 'map.yaml'
-        // })
-
-        // cmdService_test.callService(request, function(response) {
-        //     console.log('Service call: ', response);
-        // })
-
-        // const cmd = new window.ROSLIB.Topic({
-        //     ros: this.state.ros,
-        //     name: '/run_command',  // Replace with an appropriate topic name
-        //     messageType: 'std_msgs/String'
-        //   });
-
-        // const runCommand = new window.ROSLIB.Message({
-        //     data: 'rosrun your_package your_executable'  // Replace with your desired rosrun command
-        //   });
-
-        // cmd.publish(runCommand);
-
         const goal = new window.ROSLIB.Goal({
             actionClient: new window.ROSLIB.ActionClient({
                 ros: this.state.ros,
@@ -97,7 +67,7 @@ class SetGoal_2 extends Component {
                     pose: {
                         position: {
                             x: 1.0,  // Replace with the desired position
-                            y: 2.0,
+                            y: 0.0,
                             z: 0.0
                         },
                         orientation: {
@@ -118,8 +88,8 @@ class SetGoal_2 extends Component {
     render() {
         return (
             <div>
-                <Button onClick={this.sendCommand}>
-                    SET GOAL 2
+                <Button onClick={this.sendCommand} variant="success">
+                    TABLE 1
                 </Button>
             </div>
         )

@@ -169,9 +169,9 @@ NAV2D.Navigator = function (options) {
     poseListener.subscribe(function (pose) {
       //console.log(pose.position);
       //console.log(pose.orientation);
-      console.log(that.rootObject);
-      console.log(robotMarker);
-      console.log("add robot marker");
+      // console.log(that.rootObject);
+      // console.log(robotMarker);
+      // console.log("add robot marker");
       updateRobotPosition(pose.position, pose.orientation);
     });
   }

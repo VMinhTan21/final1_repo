@@ -59,9 +59,16 @@ class Connection extends Component {
 
   render() {
     return (
-      <div>
+      <div style={
+        {
+          marginTop: "10%",
+          position: "relative",
+          float: "left",
+          width: "95%"
+        }
+      }>
         <Alert
-          className="text-center m-3"
+          className="text-center"
           variant={this.state.connected ? "success" : "danger"}
         >
           {this.state.connected ? "Robot Connected" : "Robot Disconnected"}
