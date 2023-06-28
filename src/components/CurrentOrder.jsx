@@ -61,7 +61,7 @@ const CurrentOrder = () => {
                     <h5 style={{
                         marginTop: "3%",
                         marginBottom: "5%"
-                    }}>TABLE 1</h5>
+                    }}>{orders.Table}</h5>
                     <h6 style={{
                         marginBottom: "0",
                         marginTop: "3%"

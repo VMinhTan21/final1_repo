@@ -1,11 +1,14 @@
 import React, { Component } from "react";
+import { useEffect, useState } from "react";
 import { Row, Col, Container, Button } from "react-bootstrap";
 import Config from "../scripts/config";
 import * as Three from "three";
 
 import { toast } from "react-toastify"
+import axios from "axios";
 
 class RobotState extends Component {
+
   state = {
     ros: null,
     x: 0,
@@ -141,10 +144,8 @@ class RobotState extends Component {
 
   render() {
     return (
-      <div style={{
-        marginLeft: "5%"
-      }}>
-        <h4>Position</h4>
+      <div>
+        /* <h4>Position</h4>
         <p className="mt-0">x: {this.state.x}</p>
         <p className="mt-0">y: {this.state.y}</p>
         <p className="mt-0">Orientation: {this.state.orientation}</p>
@@ -155,7 +156,7 @@ class RobotState extends Component {
         </p>
         <p className="mt-0">
           Angular Velocity: {this.state.angular_velocity}
-        </p>
+        </p> */
       </div>
     );
   }
