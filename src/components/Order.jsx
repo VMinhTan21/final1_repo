@@ -1,21 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col, Container, Button, Form, Table } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
+import { Link, useParams } from "react-router-dom"
+import { useHistory } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
-import { useHistory } from "react-router-dom";
-
 const Order = (req, res) => {
 
+  const { Table } = useParams()
   const history = useHistory();
   const defaultOrder = {
     Date: new Date().toLocaleDateString("en-GB"),
     StaffID: "Staff-01",
+    Table: Table,
+    Status: "Pending",
     OrderList: [],
     Note: "",
     Total: 0,
   };
+
   const [order, setOrder] = useState(defaultOrder);
   const defaultOrderDetail = { Drink: null, Price: 0, Qty: "" };
   const [orderDetails, setOrderDetails] = useState([defaultOrderDetail]);
@@ -54,7 +58,7 @@ const Order = (req, res) => {
 
     if (isNaN(total)) total = 0;
 
-    setOrder({ ...order, Total: total });
+    setOrder({ ...order, Total: total});
   };
 
   const handleDrinkChange = (event, index) => {
@@ -107,7 +111,7 @@ const Order = (req, res) => {
       }
 
       // Create order
-      const updatedOrder = { ...order, OrderList: detailIds };
+      const updatedOrder = { ...order, OrderList: detailIds};
       const orderResponse = await axios.post(
         "https://db-api-5yux.onrender.com/order",
         updatedOrder

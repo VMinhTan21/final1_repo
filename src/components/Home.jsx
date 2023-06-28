@@ -18,17 +18,6 @@ import { ToastContainer, toast } from "react-toastify";
 
 class Home extends Component {
   componentDidMount() {
-    const server = new WebSocket('wss://localhost:3000')
-    // server.addEventListener("open", (event) => {
-    //   console.log('WEBSOCKET OPENED')
-    // })
-    server.onopen = (event) => {
-      console.log("WS EVENT EMIT")
-    }
-
-    server.onmessage = (message) => {
-      console.log("NEW MESSAGE", message)
-    }
 
     const channel = new BroadcastChannel("6B29FC40-CA47-1067-B31D-00DD010662DA");
 
@@ -115,9 +104,6 @@ class Home extends Component {
           <Row>
             <Col sm={4}>
               <Row>
-                <RobotState />
-              </Row>
-              <Row>
                 <div style={{ top: "30%", position: "relative", left: "5%" }}>
                   <h4>CONTROL</h4>
                   <Teleoperation />
@@ -130,6 +116,7 @@ class Home extends Component {
             </Col>
           </Row>
           <ToastContainer />
+          <RobotState />
         </Container>
       </div>
     );
