@@ -63,7 +63,7 @@ class SetGoal_1 extends Component {
                     },
                     pose: {
                         position: {
-                            x: 0.5,  // Replace with the desired position
+                            x: 0.0,  // Replace with the desired position
                             y: 0.0,
                             z: 0.0
                         },
