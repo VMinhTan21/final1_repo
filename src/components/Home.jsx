@@ -21,7 +21,8 @@ import io from 'socket.io-client'
 class Home extends Component {
 
   componentDidMount() {
-    const socket = io.connect('http://localhost:4000')
+    // const socket = io.connect('http://localhost:4000')
+    const socket = io.connect('http://socket-sv.vercel.app')
     // const channel = new BroadcastChannel("6B29FC40-CA47-1067-B31D-00DD010662DA");
 
     // const handleMessage = (event) => {

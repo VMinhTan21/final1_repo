@@ -128,7 +128,8 @@ class RobotState extends Component {
 
   getState() {
 
-    const socket = io.connect('http://localhost:4000')
+    //const socket = io.connect('http://localhost:4000')
+    const socket = io.connect('http://socket-sv.vercel.app')
 
     var status = new window.ROSLIB.Topic({
       ros: this.state.ros,
