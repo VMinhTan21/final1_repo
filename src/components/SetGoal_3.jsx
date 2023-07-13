@@ -79,7 +79,11 @@ class SetGoal_3 extends Component {
         });
 
         goal.send();
-        console.log('Goal 3 sent!');
+        console.log('Moving to table 2 ...');
+
+        toast.success('ROBOT IS MOVING TO TABLE 2', {
+            position: toast.POSITION.TOP_RIGHT
+        })
     }
 
     render() {

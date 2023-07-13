@@ -6,9 +6,17 @@ import { useHistory } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
+import io from "socket.io-client"
+
 const Order = (req, res) => {
 
+  //const socket = io.connect('http://localhost:4000')
+  const socket = io.connect('http://socket-sv.vercel.app')
+
   const { Table } = useParams()
+
+  console.log(typeof Table)
+
   const history = useHistory();
   const defaultOrder = {
     Date: new Date().toLocaleDateString("en-GB"),
@@ -58,7 +66,7 @@ const Order = (req, res) => {
 
     if (isNaN(total)) total = 0;
 
-    setOrder({ ...order, Total: total});
+    setOrder({ ...order, Total: total });
   };
 
   const handleDrinkChange = (event, index) => {
@@ -91,7 +99,7 @@ const Order = (req, res) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-      try {
+    try {
       // Create order details
       const detailIds = [];
 
@@ -111,7 +119,7 @@ const Order = (req, res) => {
       }
 
       // Create order
-      const updatedOrder = { ...order, OrderList: detailIds};
+      const updatedOrder = { ...order, OrderList: detailIds };
       const orderResponse = await axios.post(
         "https://db-api-5yux.onrender.com/order",
         updatedOrder
@@ -119,8 +127,10 @@ const Order = (req, res) => {
 
       // Navigation and toast
       if (orderResponse.status === 201) {
-        const channel = new BroadcastChannel("6B29FC40-CA47-1067-B31D-00DD010662DA");
-        channel.postMessage("Tạo Order thành công!");
+        // const channel = new BroadcastChannel("6B29FC40-CA47-1067-B31D-00DD010662DA");
+        // channel.postMessage("Tạo Order thành công!");
+
+        socket.emit('NEW_ORDER', {table: Table})
 
         history.push('/orderSuccess')
       } else {
@@ -135,13 +145,18 @@ const Order = (req, res) => {
     <div>
       <Form>
         <Container>
-          <Row className="justify-content-md-center">
-            <Col md={10}>
+          <Row
+            style={{
+              fontSize: '100%',
+              marginTop: '5%'
+            }} 
+            className="justify-content-md-center">
+            <Col>
               <Form.Group>
-                <Table striped borderless hover responsive size="sm">
+                <Table striped hover responsive size="md">
                   <thead>
                     <tr>
-                      <th className="text-center">#</th>
+                      <th>#</th>
                       <th className="text-center">Thức uống</th>
                       <th className="text-center">Đơn giá</th>
                       <th className="text-center">Số lượng</th>
@@ -150,10 +165,12 @@ const Order = (req, res) => {
                   <tbody id="orderDetails_table">
                     {orderDetails.map((detail, index) => (
                       <tr key={index}>
-                        <td className="d-flex center text-center">
-                          <h5 className="stt">{index + 1}</h5>
+                        <td style={{ fontWeight: 'bold', width: '5%' }}>
+                          {index + 1}
                         </td>
-                        <td>
+                        <td style={{
+                          width: '45%'
+                        }}>
                           <select
                             className="table-select"
                             onChange={(event) =>
@@ -161,7 +178,7 @@ const Order = (req, res) => {
                             }
                           >
                             <option key={0} value={0}>
-                              Chọn món
+                              Chọn
                             </option>
                             {drinks.map((drink, index) => (
                               <option key={index + 1} value={drink._id}>
@@ -170,15 +187,16 @@ const Order = (req, res) => {
                             ))}
                           </select>
                         </td>
-                        <td>
+                        <td style={{ width: "25%"}}>
                           <Form.Control
                             type="text"
                             value={detail.Price}
                             readOnly
                           ></Form.Control>
                         </td>
-                        <td>
+                        <td style={{ width: '25%'}}>
                           <Form.Control
+                            className="text-center"
                             type="text"
                             value={detail.Qty}
                             onChange={(event) => handleQtyChange(event, index)}
@@ -188,15 +206,32 @@ const Order = (req, res) => {
                     ))}
                   </tbody>
                 </Table>
-                <h5>Total: {order.Total} Đ</h5>
+
               </Form.Group>
+            </Col>
+          </Row>
+          <Row>
+            <Col style={{ fontSize: '100%', fontWeight: 'bold' }}>
+              <p>
+                Total: {order.Total} Đ
+              </p>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
               <Form.Group>
-                <Button type="button" onClick={btnAddRow_onclick}>
+                <Button
+                  variant="info" size="sm"
+                  type="button" onClick={btnAddRow_onclick}>
                   <span>+</span> Thêm món
                 </Button>
               </Form.Group>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
               <Form.Group>
-                <Form.Label>Ghi chú</Form.Label>
+                <Form.Label style={{ fontWeight: "bold" }}>Ghi chú</Form.Label>
                 <Form.Control
                   as="textarea"
                   value={order.Note}
@@ -204,8 +239,14 @@ const Order = (req, res) => {
                   onChange={(event) => handleNotesChange(event)}
                 />
               </Form.Group>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
               <Form.Group className="d-flex justify-content-center">
-                <Button type="submit" onClick={(event) => handleSubmit(event)}>
+                <Button
+                  variant="success" size="sm"
+                  type="submit" onClick={(event) => handleSubmit(event)}>
                   Đặt món
                 </Button>
               </Form.Group>
@@ -213,7 +254,7 @@ const Order = (req, res) => {
           </Row>
         </Container>
       </Form>
-      <ToastContainer/>
+      <ToastContainer />
     </div>
   );
 };

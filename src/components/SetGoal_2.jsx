@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Container, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 import Config from "../scripts/config"
 import { toast } from "react-toastify";
@@ -82,7 +82,11 @@ class SetGoal_2 extends Component {
         });
 
         goal.send();
-        console.log('Goal 2 sent!');
+        console.log('Moving to table 1 ...');
+
+        toast.success('ROBOT IS MOVING TO TABLE 1', {
+            position: toast.POSITION.TOP_RIGHT
+        })
     }
 
     render() {
