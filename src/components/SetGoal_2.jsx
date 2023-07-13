@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Container, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 import Config from "../scripts/config"
 import { toast } from "react-toastify";
@@ -66,8 +66,8 @@ class SetGoal_2 extends Component {
                     },
                     pose: {
                         position: {
-                            x: 1.0,  // Replace with the desired position
-                            y: 0.0,
+                            x: 1.6,  // Replace with the desired position
+                            y: -1.0,
                             z: 0.0
                         },
                         orientation: {
@@ -82,7 +82,11 @@ class SetGoal_2 extends Component {
         });
 
         goal.send();
-        console.log('Goal 2 sent!');
+        console.log('Moving to table 1 ...');
+
+        toast.success('ROBOT IS MOVING TO TABLE 1', {
+            position: toast.POSITION.TOP_RIGHT
+        })
     }
 
     render() {

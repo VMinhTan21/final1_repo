@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Row, Col, Container, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
+import { toast } from "react-toastify";
 
 import Config from "../scripts/config";
 
@@ -63,7 +64,7 @@ class SetGoal_1 extends Component {
                     },
                     pose: {
                         position: {
-                            x: 0.5,  // Replace with the desired position
+                            x: 0.0,  // Replace with the desired position
                             y: 0.0,
                             z: 0.0
                         },
@@ -79,7 +80,11 @@ class SetGoal_1 extends Component {
         });
 
         goal.send();
-        console.log('Goal 1 sent!');
+        console.log('Returning ...');
+
+        toast.success('ROBOT IS RETURNING', {
+            position: toast.POSITION.TOP_RIGHT
+        })
     }
 
     render() {
@@ -91,9 +96,7 @@ class SetGoal_1 extends Component {
                     style={
                         { width: "95%" }
                     }>
-
                     ROBOT RETURN
-
                 </Button>
             </div>
         )

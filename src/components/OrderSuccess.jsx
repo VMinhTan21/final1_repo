@@ -11,11 +11,24 @@ const OrderSuccess = () => {
 
     return (
         <div>
-            ORDER SUCCESSFULLY!
             <div>
-                <Button type="submit" onClick={(event) => handleOrderAgain(event)}>
-                    ORDER AGAIN
-                </Button>
+                <Row>
+                    <Col>
+                        <div className="d-flex justify-content-center">
+                            ORDER SUCCESSFULLY!
+                        </div>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col className="d-flex justify-content-center">
+                        <Button
+                            variant="success"
+                            type="submit" onClick={(event) => handleOrderAgain(event)}>
+                            ORDER AGAIN
+                        </Button>
+                    </Col>
+                </Row>
+
             </div>
         </div>
     )

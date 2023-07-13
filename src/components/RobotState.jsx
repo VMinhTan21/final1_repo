@@ -5,10 +5,9 @@ import Config from "../scripts/config";
 import * as Three from "three";
 
 import { toast } from "react-toastify"
-import axios from "axios";
+import io from "socket.io-client"
 
 class RobotState extends Component {
-
   state = {
     ros: null,
     x: 0,
@@ -128,6 +127,9 @@ class RobotState extends Component {
   }
 
   getState() {
+
+    const socket = io.connect('http://localhost:4000')
+
     var status = new window.ROSLIB.Topic({
       ros: this.state.ros,
       name: 'move_base/result',
@@ -136,16 +138,18 @@ class RobotState extends Component {
 
     status.subscribe((message) => {
       console.log(message)
-      toast.success("GOAL TABLE REACHED", {
+      toast.success("GOAL REACHED", {
         position: toast.POSITION.TOP_CENTER
       })
     })
+
+    socket.emit('GOAL_REACHED')
   }
 
   render() {
     return (
       <div>
-        /* <h4>Position</h4>
+        {/* <h4>Position</h4>
         <p className="mt-0">x: {this.state.x}</p>
         <p className="mt-0">y: {this.state.y}</p>
         <p className="mt-0">Orientation: {this.state.orientation}</p>
@@ -156,7 +160,7 @@ class RobotState extends Component {
         </p>
         <p className="mt-0">
           Angular Velocity: {this.state.angular_velocity}
-        </p> */
+        </p>  */}
       </div>
     );
   }
