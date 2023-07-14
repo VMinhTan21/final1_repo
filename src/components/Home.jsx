@@ -21,19 +21,9 @@ import io from 'socket.io-client'
 class Home extends Component {
 
   componentDidMount() {
-    // const socket = io.connect('http://localhost:4000')
-    const socket = io.connect('http://socket-sv.vercel.app')
-    // const channel = new BroadcastChannel("6B29FC40-CA47-1067-B31D-00DD010662DA");
-
-    // const handleMessage = (event) => {
-    //   toast.success("NEW ORDER FROM CLIENT! REFRESH IF YOU WANNA DELIVER THIS", {
-    //     position: toast.POSITION.TOP_RIGHT,
-    //   });
-    // };
-
-    // channel.addEventListener("message", handleMessage);
-
-    // this.channel = channel;
+    const socket = io("https://socket-robot-sv.onrender.com/", {
+    transports: ['websocket'],
+  })
 
     socket.on('RECEIVED_NEW_ORDER', (data) => {
       console.log(data)
@@ -47,9 +37,7 @@ class Home extends Component {
   }
 
   componentWillUnmount() {
-    // if (this.channel) {
-    //   this.channel.removeEventListener("message", this.handleMessage);
-    // }
+
   }
 
   render() {
