@@ -12,7 +12,7 @@ const Order = (req, res) => {
 
   //const socket = io.connect('http://localhost:4000')
   //const socket = io.connect('http://socket-sv.vercel.app')
-  const socket = io("http://socket-sv.vercel.app", {
+  const socket = io("https://socket-robot-sv.onrender.com/", {
     transports: ['websocket'],
   })
 
