@@ -11,7 +11,10 @@ import io from "socket.io-client"
 const Order = (req, res) => {
 
   //const socket = io.connect('http://localhost:4000')
-  const socket = io.connect('http://socket-sv.vercel.app')
+  //const socket = io.connect('http://socket-sv.vercel.app')
+  const socket = io("http://socket-sv.vercel.app", {
+    transports: ['websocket'],
+  })
 
   const { Table } = useParams()
 
