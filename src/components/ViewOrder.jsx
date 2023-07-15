@@ -54,7 +54,7 @@ const ViewOrder = () => {
         <thead>
           <tr>
             <th>#</th>
-            <th>Ngày</th>
+            <th>Date</th>
             <th>StaffID</th>
             <th>Note</th>
             <th>Total</th>

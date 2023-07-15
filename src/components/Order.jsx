@@ -160,9 +160,9 @@ const Order = (req, res) => {
                   <thead>
                     <tr>
                       <th>#</th>
-                      <th className="text-center">Thức uống</th>
-                      <th className="text-center">Đơn giá</th>
-                      <th className="text-center">Số lượng</th>
+                      <th className="text-center">Drinks</th>
+                      <th className="text-center">Price</th>
+                      <th className="text-center">Quantity</th>
                     </tr>
                   </thead>
                   <tbody id="orderDetails_table">
@@ -181,7 +181,7 @@ const Order = (req, res) => {
                             }
                           >
                             <option key={0} value={0}>
-                              Chọn
+                              Select
                             </option>
                             {drinks.map((drink, index) => (
                               <option key={index + 1} value={drink._id}>
@@ -226,7 +226,7 @@ const Order = (req, res) => {
                 <Button
                   variant="info" size="sm"
                   type="button" onClick={btnAddRow_onclick}>
-                  <span>+</span> Thêm món
+                  <span>+</span> Add
                 </Button>
               </Form.Group>
             </Col>
@@ -234,7 +234,7 @@ const Order = (req, res) => {
           <Row>
             <Col>
               <Form.Group>
-                <Form.Label style={{ fontWeight: "bold" }}>Ghi chú</Form.Label>
+                <Form.Label style={{ fontWeight: "bold" }}>Note</Form.Label>
                 <Form.Control
                   as="textarea"
                   value={order.Note}
@@ -250,7 +250,7 @@ const Order = (req, res) => {
                 <Button
                   variant="success" size="sm"
                   type="submit" onClick={(event) => handleSubmit(event)}>
-                  Đặt món
+                  Order
                 </Button>
               </Form.Group>
             </Col>
