@@ -54,9 +54,15 @@ const CurrentOrder = () => {
         float: "right"
     }
 
+    // style={{marginTop: "3%", right: "3%"}}
+
     return (
-        <div>
-            <Card bg="warning" text="primary" style={{marginTop: "3%", right: "3%"}}>
+        <div style={{
+            position: "relative",
+            left: "50%",
+            transform: "translateX(-50%)"
+        }}>
+            <Card text="primary" style={{marginTop: "2%", marginBottom: "5%", backgroundColor: "#DFFFCC"}}>
                 <Card.Body>
                     <h5 style={{
                         marginTop: "3%",
@@ -64,9 +70,10 @@ const CurrentOrder = () => {
                     }}>{orders.Table}</h5>
                     <h6 style={{
                         marginBottom: "0",
-                        marginTop: "3%"
+                        marginTop: "3%",
+                        marginBottom: "2%"
                     }}>List drinks of order</h6>
-                    <Table striped borderless hover responsive size="md">
+                    <Table striped borderless hover responsive size="md" style={{border: "1px solid"}}>
                         <thead>
                             <tr>
                                 <th><h6>#</h6></th>

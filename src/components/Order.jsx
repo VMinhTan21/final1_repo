@@ -146,7 +146,9 @@ const Order = (req, res) => {
 
   return (
     <div>
-      <Form>
+      <Form style={{
+        backgroundColor: "#EFFFFF"
+      }}>
         <Container>
           <Row
             style={{
@@ -154,7 +156,7 @@ const Order = (req, res) => {
               marginTop: '5%'
             }} 
             className="justify-content-md-center">
-            <Col>
+            <Col style={{ border: "1px solid"}}>
               <Form.Group>
                 <Table striped hover responsive size="md">
                   <thead>
@@ -199,8 +201,11 @@ const Order = (req, res) => {
                         </td>
                         <td style={{ width: '25%'}}>
                           <Form.Control
-                            className="text-center"
-                            type="text"
+                            //className="text-center"
+                            type="number"
+                            step="1"
+                            max="5"
+                            class="quantity-field border-0 text-center"
                             value={detail.Qty}
                             onChange={(event) => handleQtyChange(event, index)}
                           ></Form.Control>
@@ -213,14 +218,17 @@ const Order = (req, res) => {
               </Form.Group>
             </Col>
           </Row>
-          <Row>
-            <Col style={{ fontSize: '100%', fontWeight: 'bold' }}>
-              <p>
+          <Row  style={{ border: "1px solid", borderTop: "none", borderBottom: "none"}}>
+            <Col style={{ 
+                fontSize: '100%', 
+                fontWeight: 'bold' }}>
+              <p style={{ 
+                marginTop: "1%" }}>
                 Total: {order.Total} Đ
               </p>
             </Col>
           </Row>
-          <Row>
+          <Row style={{ border: "1px solid", borderTop: "none", borderBottom: "none"}}>
             <Col>
               <Form.Group>
                 <Button
@@ -231,7 +239,7 @@ const Order = (req, res) => {
               </Form.Group>
             </Col>
           </Row>
-          <Row>
+          <Row style={{ border: "1px solid", borderTop: "none", borderBottom: "none"}}>
             <Col>
               <Form.Group>
                 <Form.Label style={{ fontWeight: "bold" }}>Note</Form.Label>
@@ -244,7 +252,7 @@ const Order = (req, res) => {
               </Form.Group>
             </Col>
           </Row>
-          <Row>
+          <Row style={{ border: "1px solid", borderTop: "none"}}>
             <Col>
               <Form.Group className="d-flex justify-content-center">
                 <Button

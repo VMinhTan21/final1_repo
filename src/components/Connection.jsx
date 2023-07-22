@@ -63,8 +63,8 @@ class Connection extends Component {
         {
           marginTop: "10%",
           position: "relative",
-          float: "left",
-          width: "95%"
+          float: "right",
+          width: "100%"
         }
       }>
         <Alert

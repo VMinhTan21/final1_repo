@@ -22,8 +22,8 @@ class Home extends Component {
 
   componentDidMount() {
     const socket = io("https://socket-robot-sv.onrender.com/", {
-    transports: ['websocket'],
-  })
+      transports: ['websocket'],
+    })
 
     socket.on('RECEIVED_NEW_ORDER', (data) => {
       console.log(data)
@@ -43,78 +43,91 @@ class Home extends Component {
   render() {
     const cusStyle = {
       position: "relative",
-      float: "right"
+      left: "15%"
     }
     return (
-      <div>
+      <div style={{ backgroundColor: "#EFFFFF" }}>
         <HomeNavbar />
         <Container>
           <Row>
-            <Col>
-              <div className="text-center"
-                style={
-                  {
-                    marginTop: "8%"
-                  }
-                }>
-                <h4>
-                  ROBOT CONTROLS
-                </h4>
-              </div>
-              <Row style={{ marginTop: "5%" }}>
-                <Col>
-                  <SetGoal_2 />
-                </Col>
-                <Col>
-                  <SetGoal_3 />
-                </Col>
-                <Col>
-                  <SetGoal_4 />
-                </Col>
-                <Col>
-                  <SetGoal_5 />
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <SetGoal_1 />
-                </Col>
-                <Col>
-                  <Connection />
-                </Col>
-              </Row>
-            </Col>
-            <Col>
-              <div className="text-center"
-                style={
-                  {
-                    marginTop: "8%"
-                  }
-                }>
-                <h4>
-                  CURRENTLY ORDER
-                </h4>
-              </div>
-              <Row style={cusStyle}>
-                <div>
-                  <CurrentOrder />
+            <Col style={{ border: "1px solid", borderRight: "none" }}>
+              <div style={{ marginTop: "7%" }}>
+                <div className="text-center">
+                  <h4>
+                    ROBOT CONTROLS
+                  </h4>
                 </div>
-              </Row>
+                <Row>
+                  <div style={{
+                    position: "relative",
+                    left: "50%",
+                    transform: "translateX(-50%)"
+                  }}>
+                    <Card style={{ marginTop: "2%", backgroundColor: "#EFFFFF", border: "none" }}>
+                      <Row style={{ marginTop: "5%" }}>
+                        <Col>
+                          <SetGoal_2 />
+                        </Col>
+                        <Col>
+                          <SetGoal_3 />
+                        </Col>
+                        <Col>
+                          <SetGoal_4 />
+                        </Col>
+                        <Col>
+                          <SetGoal_5 />
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col>
+                          <SetGoal_1 />
+                        </Col>
+                        <Col>
+                          <Connection />
+                        </Col>
+                      </Row>
+                    </Card>
+                  </div>
+                </Row>
+              </div>
+            </Col>
+            <Col style={{ border: "1px solid" }}>
+              <div style={{ marginTop: "7%" }}>
+                <div className="text-center">
+                  <h4>
+                    CURRENTLY ORDER
+                  </h4>
+                </div>
+                <Row>
+                  <CurrentOrder />
+                </Row>
+              </div>
             </Col>
           </Row>
 
-          <Row>
+          <Row style={
+            {
+              backgroundColor: "#EFFFFF",
+              borderLeft: "1px solid",
+              borderRight: "1px solid",
+              borderBottom: "1px solid"
+            }
+          }>
             <Col sm={4}>
-              <Row>
-                <div style={{ top: "30%", position: "relative", left: "5%" }}>
+              <div style={{ position: "relative", left: "50%" }}>
+                <div style={{ marginTop: "5vh" }}>
                   <h4>CONTROL</h4>
-                  <Teleoperation />
                 </div>
-              </Row>
+                <Teleoperation />
+              </div>
             </Col>
             <Col sm={8}>
-              <h4>MAP</h4>
-              <Map />
+              <div>
+                <div style={{ marginTop: "5vh" }}>
+                  <h4>MAP</h4>
+                </div>
+                <Map />
+              </div>            
             </Col>
           </Row>
           <ToastContainer />

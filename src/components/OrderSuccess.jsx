@@ -11,11 +11,14 @@ const OrderSuccess = () => {
 
     return (
         <div>
-            <div>
+            <div style={{marginTop: "5vh"}}>
                 <Row>
                     <Col>
-                        <div className="d-flex justify-content-center">
-                            ORDER SUCCESSFULLY!
+                        <div className="d-flex justify-content-center"
+                            style={{marginBottom: "1vh"}}>
+                            <h5>
+                               ORDER SUCCESSFULLY! 
+                            </h5>                            
                         </div>
                     </Col>
                 </Row>

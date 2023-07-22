@@ -94,7 +94,7 @@ class SetGoal_1 extends Component {
             }}>
                 <Button onClick={this.sendCommand} variant="info"
                     style={
-                        { width: "95%" }
+                        { width: "100%" }
                     }>
                     ROBOT RETURN
                 </Button>
