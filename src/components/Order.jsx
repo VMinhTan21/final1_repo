@@ -133,7 +133,7 @@ const Order = (req, res) => {
         // const channel = new BroadcastChannel("6B29FC40-CA47-1067-B31D-00DD010662DA");
         // channel.postMessage("Tạo Order thành công!");
 
-        socket.emit('NEW_ORDER', {table: Table})
+        socket.emit('NEW_ORDER', { table: Table })
 
         history.push('/orderSuccess')
       } else {
@@ -145,18 +145,27 @@ const Order = (req, res) => {
   };
 
   return (
-    <div>
-      <Form style={{
-        backgroundColor: "#EFFFFF"
-      }}>
+    <div style={{
+      backgroundColor: "#EFFFFF"
+    }}>
+      <Row>
+        <Col>
+          <h5 style={{
+            margin: "10px 15px",
+            fontWeight: "bold"
+          }}>
+            COFFEE ROS ROBOT - ORDER FORM
+          </h5>
+        </Col>
+      </Row>
+      <Form >
         <Container>
           <Row
             style={{
-              fontSize: '100%',
-              marginTop: '5%'
-            }} 
+              fontSize: '100%'
+            }}
             className="justify-content-md-center">
-            <Col style={{ border: "1px solid"}}>
+            <Col style={{ border: "1px solid" }}>
               <Form.Group>
                 <Table striped hover responsive size="md">
                   <thead>
@@ -192,14 +201,14 @@ const Order = (req, res) => {
                             ))}
                           </select>
                         </td>
-                        <td style={{ width: "25%"}}>
+                        <td style={{ width: "25%" }}>
                           <Form.Control
                             type="text"
                             value={detail.Price}
                             readOnly
                           ></Form.Control>
                         </td>
-                        <td style={{ width: '25%'}}>
+                        <td style={{ width: '25%' }}>
                           <Form.Control
                             //className="text-center"
                             type="number"
@@ -218,17 +227,19 @@ const Order = (req, res) => {
               </Form.Group>
             </Col>
           </Row>
-          <Row  style={{ border: "1px solid", borderTop: "none", borderBottom: "none"}}>
-            <Col style={{ 
-                fontSize: '100%', 
-                fontWeight: 'bold' }}>
-              <p style={{ 
-                marginTop: "1%" }}>
+          <Row style={{ border: "1px solid", borderTop: "none", borderBottom: "none" }}>
+            <Col style={{
+              fontSize: '100%',
+              fontWeight: 'bold'
+            }}>
+              <p style={{
+                marginTop: "2%"
+              }}>
                 Total: {order.Total} Đ
               </p>
             </Col>
           </Row>
-          <Row style={{ border: "1px solid", borderTop: "none", borderBottom: "none"}}>
+          <Row style={{ border: "1px solid", borderTop: "none", borderBottom: "none" }}>
             <Col>
               <Form.Group>
                 <Button
@@ -239,7 +250,7 @@ const Order = (req, res) => {
               </Form.Group>
             </Col>
           </Row>
-          <Row style={{ border: "1px solid", borderTop: "none", borderBottom: "none"}}>
+          <Row style={{ border: "1px solid", borderTop: "none", borderBottom: "none" }}>
             <Col>
               <Form.Group>
                 <Form.Label style={{ fontWeight: "bold" }}>Note</Form.Label>
@@ -252,7 +263,7 @@ const Order = (req, res) => {
               </Form.Group>
             </Col>
           </Row>
-          <Row style={{ border: "1px solid", borderTop: "none"}}>
+          <Row style={{ border: "1px solid", borderTop: "none" }}>
             <Col>
               <Form.Group className="d-flex justify-content-center">
                 <Button

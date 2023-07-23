@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Table } from "react-bootstrap";
 import { Modal } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import OrderDetail from "./OrderDetail";
 
 const ViewOrder = () => {
@@ -49,7 +50,19 @@ const ViewOrder = () => {
   };
 
   return (
-    <div>
+    <div style={{
+      backgroundColor: "#EFFFFF",
+      border: "1px solid"
+    }}>
+      <Row>
+        <Col>
+          <h5 style={{
+            margin: "15px 10px"
+          }}>
+            LIST ORDER
+          </h5>
+        </Col>
+      </Row>
       <Table striped borderless hover responsive size="sm">
         <thead>
           <tr>
@@ -74,12 +87,13 @@ const ViewOrder = () => {
           })}
         </tbody>
       </Table>
-      <Modal show={showModal} onHide={handleCloseModal}>
-        <Modal.Header closeButton>
+      <Modal show={showModal} onHide={handleCloseModal}
+              >
+        <Modal.Header closeButton style={{ backgroundColor: "#EFFFFF"}}>
           <Modal.Title>Order Detail</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          {selectedOrder && <OrderDetail order={selectedOrder}  drinks={drinks}/>}
+        <Modal.Body style={{ backgroundColor: "#EFFFFF"}}>
+          {selectedOrder && <OrderDetail order={selectedOrder} drinks={drinks} />}
         </Modal.Body>
       </Modal>
     </div>

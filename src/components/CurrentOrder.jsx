@@ -62,7 +62,7 @@ const CurrentOrder = () => {
             left: "50%",
             transform: "translateX(-50%)"
         }}>
-            <Card text="primary" style={{marginTop: "2%", marginBottom: "5%", backgroundColor: "#DFFFCC"}}>
+            <Card text="primary" style={{marginTop: "7%", marginBottom: "5%", backgroundColor: "#FFB244"}}>
                 <Card.Body>
                     <h5 style={{
                         marginTop: "3%",
@@ -79,7 +79,7 @@ const CurrentOrder = () => {
                                 <th><h6>#</h6></th>
                                 <th><h6>Drink</h6></th>
                                 <th><h6>Price</h6></th>
-                                <th><h6>Price</h6></th>
+                                <th><h6>Qty</h6></th>
                             </tr>
                         </thead>
                         <tbody id="orders_table">
