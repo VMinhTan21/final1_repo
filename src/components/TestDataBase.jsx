@@ -30,8 +30,7 @@ class TestDataBase extends Component {
       <div>
         <Container>
           <HomeNavbar />
-          <h2>LIST ORDER</h2>
-          <br />
+          
           <ViewOrder />
           <ToastContainer />
         </Container>

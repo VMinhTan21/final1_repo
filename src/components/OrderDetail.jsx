@@ -31,8 +31,8 @@ const OrderDetail = (props) => {
   };
 
   return (
-    <div>
-      <h4>Table: Order Detail</h4>
+    <div style={{ backgroundColor: "#EFFFFF"}}>
+      <h4>Table: {order.Table}</h4>
       <br />
       <div>Total: {order.Total}</div>
       <Table striped borderless hover responsive size="sm">

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Modal, Card, Table, Col, Row, Button } from "react-bootstrap";
-import SetGoal_2 from "./SetGoal_2";
 
 const CurrentOrder = () => {
     const [drinks, setDrinks] = useState([]);
@@ -54,9 +53,15 @@ const CurrentOrder = () => {
         float: "right"
     }
 
+    // style={{marginTop: "3%", right: "3%"}}
+
     return (
-        <div>
-            <Card bg="warning" text="primary" style={{marginTop: "3%", right: "3%"}}>
+        <div style={{
+            position: "relative",
+            left: "50%",
+            transform: "translateX(-50%)"
+        }}>
+            <Card text="primary" style={{marginTop: "7%", marginBottom: "5%", backgroundColor: "#FFB244"}}>
                 <Card.Body>
                     <h5 style={{
                         marginTop: "3%",
@@ -64,15 +69,16 @@ const CurrentOrder = () => {
                     }}>{orders.Table}</h5>
                     <h6 style={{
                         marginBottom: "0",
-                        marginTop: "3%"
+                        marginTop: "3%",
+                        marginBottom: "2%"
                     }}>List drinks of order</h6>
-                    <Table striped borderless hover responsive size="md">
+                    <Table striped borderless hover responsive size="md" style={{border: "1px solid"}}>
                         <thead>
                             <tr>
                                 <th><h6>#</h6></th>
                                 <th><h6>Drink</h6></th>
                                 <th><h6>Price</h6></th>
-                                <th><h6>Price</h6></th>
+                                <th><h6>Qty</h6></th>
                             </tr>
                         </thead>
                         <tbody id="orders_table">

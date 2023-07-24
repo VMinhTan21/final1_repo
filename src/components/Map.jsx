@@ -9,12 +9,19 @@ class Map extends Component {
   constructor() {
     super();
     //this.init_connection = this.view_map.bind(this);
+    this.init_connection()
     this.view_map = this.view_map.bind(this);
   }
 
   init_connection() {
     //this.setState({ ros: new ROSLIB.Ros() });
     this.state.ros = new window.ROSLIB.Ros();
+    this.state.ros.on('connection', (e) => {
+      console.log(e)
+      this.setState({
+          ros: this.state.ros
+      })
+  })
     console.log("Map:" + this.state.ros);
     try {
       this.state.ros.connect(
@@ -45,8 +52,8 @@ class Map extends Component {
   view_map() {
     var viewer = new window.ROS2D.Viewer({
       divID: "nav_div",
-      width: 720,
-      height: 640,
+      width: 650,
+      height: 450,
     });
     var navClient = new window.NAV2D.OccupancyGridClientNav({
       ros: this.state.ros,
@@ -62,7 +69,8 @@ class Map extends Component {
       <div>
         <div id="nav_div" style={{
           position: "relative",
-          float: "right"
+          float: "left",
+          marginBottom: "2vh"
         }}></div>
       </div>
     );
