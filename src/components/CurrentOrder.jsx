@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Modal, Card, Table, Col, Row, Button } from "react-bootstrap";
-import SetGoal_2 from "./SetGoal_2";
 
 const CurrentOrder = () => {
     const [drinks, setDrinks] = useState([]);

@@ -9,12 +9,19 @@ class Map extends Component {
   constructor() {
     super();
     //this.init_connection = this.view_map.bind(this);
+    this.init_connection()
     this.view_map = this.view_map.bind(this);
   }
 
   init_connection() {
     //this.setState({ ros: new ROSLIB.Ros() });
     this.state.ros = new window.ROSLIB.Ros();
+    this.state.ros.on('connection', (e) => {
+      console.log(e)
+      this.setState({
+          ros: this.state.ros
+      })
+  })
     console.log("Map:" + this.state.ros);
     try {
       this.state.ros.connect(
