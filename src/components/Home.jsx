@@ -17,13 +17,20 @@ import { ToastContainer, toast } from "react-toastify";
 
 import { useState, useEffect } from "react";
 import io from 'socket.io-client'
+import axios from "axios";
 
 class Home extends Component {
+
+  state = {
+    currentOrderkey: 0
+  }
 
   componentDidMount() {
     const socket = io("https://socket-robot-sv.onrender.com/", {
       transports: ['websocket'],
     })
+
+
 
     socket.on('RECEIVED_NEW_ORDER', (data) => {
       console.log(data)
@@ -34,17 +41,44 @@ class Home extends Component {
         position: toast.POSITION.TOP_RIGHT,
       });
     })
+
+    socket.on('GOAL_REACHED_CHANGE_CURRENT_ORDER', (data) => {
+      console.log('GOAL_REACHED_RECEIVED')
+
+      this.fetchCurrentOrder()
+      this.setState((prev) => ({
+        currentOrderkey: prev.currentOrderkey + 1
+      }))
+
+      console.log('current order changed state')
+    })
   }
 
-  componentWillUnmount() {
+  async fetchCurrentOrder() {
+    const currentOrder = await axios.get("https://db-api-5yux.onrender.com/order")
 
+    let length = currentOrder.data.length
+    let index = 0
+
+    for (let i = 0; i < length; i++) {
+      if (currentOrder.data[i].Status == "Pending") {
+        index = i
+        break
+      }
+    }
+
+    let OrderID = currentOrder.data[index]._id
+
+    const shouldOrderUpdated = await axios.get(`https://db-api-5yux.onrender.com/order/${OrderID}`)
+    console.log("Order should be updated")
+    console.log(shouldOrderUpdated.data)
+
+    shouldOrderUpdated.data.Status = "Complately"
+
+    const update = await axios.put(`https://db-api-5yux.onrender.com/order/${OrderID}`, shouldOrderUpdated.data)
   }
 
   render() {
-    const cusStyle = {
-      position: "relative",
-      left: "15%"
-    }
     return (
       <div style={{ backgroundColor: "#EFFFFF" }}>
         <HomeNavbar />
@@ -99,7 +133,7 @@ class Home extends Component {
                   </h4>
                 </div>
                 <Row>
-                  <CurrentOrder />
+                  <CurrentOrder key={this.state.currentOrderkey} />
                 </Row>
               </div>
             </Col>
@@ -127,7 +161,7 @@ class Home extends Component {
                   <h4>MAP</h4>
                 </div>
                 <Map />
-              </div>            
+              </div>
             </Col>
           </Row>
           <ToastContainer />

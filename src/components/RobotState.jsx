@@ -129,8 +129,8 @@ class RobotState extends Component {
   getState() {
 
     const socket = io("https://socket-robot-sv.onrender.com/", {
-    transports: ['websocket'],
-  })
+      transports: ['websocket'],
+    })
 
     var status = new window.ROSLIB.Topic({
       ros: this.state.ros,
@@ -143,9 +143,11 @@ class RobotState extends Component {
       toast.success("GOAL REACHED", {
         position: toast.POSITION.TOP_CENTER
       })
+
+      socket.emit('GOAL_REACHED')
     })
 
-    socket.emit('GOAL_REACHED')
+
   }
 
   render() {
