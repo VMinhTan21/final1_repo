@@ -125,12 +125,18 @@ NAV2D.Navigator = function (options) {
       pulse: true,
     });
   } else {
+    // console.log(use_image)
+    // console.log(ROS2D.hasOwnProperty("ImageNavigator"))
     robotMarker = new ROS2D.NavigationArrow({
       size: 25,
       strokeSize: 1,
       fillColor: createjs.Graphics.getRGB(255, 128, 0, 0.66),
       pulse: true,
     });
+
+    // console.log("RobotMarker Scale")
+    // console.log(robotMarker.scaleX)
+    // console.log(robotMarker.scaleY)
   }
 
   // wait for a pose to come in first
@@ -139,15 +145,26 @@ NAV2D.Navigator = function (options) {
   var initScaleSet = false;
 
   var updateRobotPosition = function (pose, orientation) {
+    // console.log("Stage")
+    // console.log(stage.scaleX)
+    // console.log(stage.scaleY)
+
     // update the robots position on the map
     robotMarker.x = pose.x;
     robotMarker.y = -pose.y;
     console.log(initScaleSet);
     if (!initScaleSet) {
-      robotMarker.scaleX = 1.0 / stage.scaleX;
-      robotMarker.scaleY = 1.0 / stage.scaleY;
+      // robotMarker.scaleX = 1.0 / stage.scaleX;
+      // robotMarker.scaleY = 1.0 / stage.scaleY;
+      console.log(1.0 / stage.scaleX)
+      console.log(1.0 / stage.scaleY)
+      robotMarker.scaleX = 0.03;
+      robotMarker.scaleY = 0.04;
       initScaleSet = true;
     }
+    // console.log(robotMarker.scaleX)
+    // console.log(robotMarker.scaleY)
+
     // change the angle
     robotMarker.rotation = stage.rosQuaternionToGlobalTheta(orientation);
     // Set visible

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Modal, Card, Table, Col, Row, Button } from "react-bootstrap";
+import { Card, Table } from "react-bootstrap";
+import io from 'socket.io-client'
 
-const CurrentOrder = () => {
+const CurrentOrder = (props) => {
     const [drinks, setDrinks] = useState([]);
     const [orders, setOrders] = useState([]);
 
@@ -30,17 +31,35 @@ const CurrentOrder = () => {
         const details = []
 
         try {
-            const response = await axios.get("https://db-api-5yux.onrender.com/order")
-            const data = response.data[response.data.length - 1]
-            const orderList = data.OrderList
+            // const response = axios.get("https://db-api-5yux.onrender.com/order")
+            // let length = response.data.length
+            // let index = 0
 
+            // for(let i = 0; i < length ; i++) {
+            //     if (response.data[i].Status == "Pending") {
+            //         index = i
+            //         break
+            //     }
+            // }
+ 
+            const data = props.data
+            //const data = response.data[index]
             setOrders(data)
+            console.log("Got data")
+            console.log(data)
+
+            const orderList = data.OrderList
+            console.log("orderList")
+            console.log(orderList)
 
             for (let detailId of orderList) {
                 const res = await axios.get(`https://db-api-5yux.onrender.com/orderDetail/${detailId}`)
                 const dataDetails = res.data
+                console.log(dataDetails)
                 details.push(dataDetails)
             }
+
+            console.log(details)
 
             setOrderDetails(details)
         } catch (error) {
@@ -61,18 +80,19 @@ const CurrentOrder = () => {
             left: "50%",
             transform: "translateX(-50%)"
         }}>
-            <Card text="primary" style={{marginTop: "7%", marginBottom: "5%", backgroundColor: "#FFB244"}}>
+            <Card text="primary" style={{ marginTop: "7%", marginBottom: "5%", backgroundColor: "#FFB244" }}>
                 <Card.Body>
                     <h5 style={{
                         marginTop: "3%",
                         marginBottom: "5%"
                     }}>{orders.Table}</h5>
+                    <h5>{orders.Status}</h5>
                     <h6 style={{
                         marginBottom: "0",
                         marginTop: "3%",
                         marginBottom: "2%"
                     }}>List drinks of order</h6>
-                    <Table striped borderless hover responsive size="md" style={{border: "1px solid"}}>
+                    <Table striped borderless hover responsive size="md" style={{ border: "1px solid" }}>
                         <thead>
                             <tr>
                                 <th><h6>#</h6></th>

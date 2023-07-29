@@ -17,10 +17,25 @@ import { ToastContainer, toast } from "react-toastify";
 
 import { useState, useEffect } from "react";
 import io from 'socket.io-client'
+import axios from "axios";
 
 class Home extends Component {
 
+  state = {
+    currentOrderkey: 0,
+    currentOrderData: {}
+  }
+
+  constructor() {
+    super()
+
+    this.fetchCurrentOrder()
+  }
+
   componentDidMount() {
+
+    // this.fetchCurrentOrder()
+
     const socket = io("https://socket-robot-sv.onrender.com/", {
       transports: ['websocket'],
     })
@@ -34,17 +49,94 @@ class Home extends Component {
         position: toast.POSITION.TOP_RIGHT,
       });
     })
+
+    socket.on('GOAL_REACHED_CHANGE_CURRENT_ORDER', (data) => {
+      console.log('GOAL_REACHED_RECEIVED')
+
+      this.changeCurrentOrder()
+      // this.setState((prev) => ({
+      //   currentOrderkey: prev.currentOrderkey + 1
+      // }))
+
+      console.log('current order changed state')
+    })
   }
 
-  componentWillUnmount() {
+  async fetchCurrentOrder() {
+    const currentOrder = await axios.get("https://db-api-5yux.onrender.com/order")
+
+    let length = currentOrder.data.length
+    let index = 0
+
+    for (let i = 0; i < length; i++) {
+      if (currentOrder.data[i].Status == "Pending") {
+        index = i
+        break
+      }
+    }
+
+    let OrderID = currentOrder.data[index]._id
+
+    const CurrentOrderData = await axios.get(`https://db-api-5yux.onrender.com/order/${OrderID}`)
+
+    console.log("Current Order data")
+    console.log(CurrentOrderData.data)
+
+    this.setState({
+      currentOrderData: CurrentOrderData.data
+    })
+
+    console.log("Passing this data to <CurrentOrder> ", typeof this.state.currentOrderData)
+    console.log(this.state.currentOrderData)
+
+    this.setState((prev) => ({
+      currentOrderkey: prev.currentOrderkey + 1
+    }))
+  }
+
+  async changeCurrentOrder() {
+    let OrderID = this.state.currentOrderData._id
+
+    const shouldOrderUpdated = this.state.currentOrderData
+    
+    
+    console.log("Order should be updated")
+    console.log(shouldOrderUpdated)
+
+    shouldOrderUpdated.Status = "Complately"
+
+    const update = await axios.put(`https://db-api-5yux.onrender.com/order/${OrderID}`, shouldOrderUpdated)
+
+    const currentOrder = await axios.get("https://db-api-5yux.onrender.com/order")
+
+    let length = currentOrder.data.length
+    let index = 0
+
+    for (let i = 0; i < length; i++) {
+      if (currentOrder.data[i].Status == "Pending") {
+        index = i
+        break
+      }
+    }
+
+    let NewOrderID = currentOrder.data[index]._id
+
+    const CurrentOrderData = await axios.get(`https://db-api-5yux.onrender.com/order/${NewOrderID}`)
+
+    console.log("Current Order data")
+    console.log(CurrentOrderData.data)
+
+    this.setState({
+      currentOrderData: CurrentOrderData.data
+    })
+
+    this.setState((prev) => ({
+      currentOrderkey: prev.currentOrderkey + 1
+    }))
 
   }
 
   render() {
-    const cusStyle = {
-      position: "relative",
-      left: "15%"
-    }
     return (
       <div style={{ backgroundColor: "#EFFFFF" }}>
         <HomeNavbar />
@@ -99,7 +191,7 @@ class Home extends Component {
                   </h4>
                 </div>
                 <Row>
-                  <CurrentOrder />
+                  <CurrentOrder key={this.state.currentOrderkey} data={this.state.currentOrderData} />
                 </Row>
               </div>
             </Col>
@@ -127,7 +219,7 @@ class Home extends Component {
                   <h4>MAP</h4>
                 </div>
                 <Map />
-              </div>            
+              </div>
             </Col>
           </Row>
           <ToastContainer />
