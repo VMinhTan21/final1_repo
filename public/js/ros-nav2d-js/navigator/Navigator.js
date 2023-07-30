@@ -158,8 +158,8 @@ NAV2D.Navigator = function (options) {
       // robotMarker.scaleY = 1.0 / stage.scaleY;
       console.log(1.0 / stage.scaleX)
       console.log(1.0 / stage.scaleY)
-      robotMarker.scaleX = 0.03;
-      robotMarker.scaleY = 0.04;
+      robotMarker.scaleX = 0.015;
+      robotMarker.scaleY = 0.02;
       initScaleSet = true;
     }
     // console.log(robotMarker.scaleX)

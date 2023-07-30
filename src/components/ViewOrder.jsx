@@ -67,8 +67,9 @@ const ViewOrder = () => {
         <thead>
           <tr>
             <th>#</th>
+            <th>Status</th>
             <th>Date</th>
-            <th>StaffID</th>
+            {/* <th>StaffID</th> */}
             <th>Note</th>
             <th>Total</th>
           </tr>
@@ -78,8 +79,9 @@ const ViewOrder = () => {
             return (
               <tr key={order._id} onClick={() => handleRowClick(order)} className="pointer">
                 <td>{index + 1}</td>
+                <td>{order.Status}</td>
                 <td>{order.Date}</td>
-                <td>{order.StaffID}</td>
+                {/* <td>{order.StaffID}</td> */}
                 <td>{order.Note}</td>
                 <td>{order.Total}</td>
               </tr>
