@@ -22,7 +22,7 @@ class Body extends Component {
             <Route path="/newOrder/:Table" exact component={Order}></Route>
 
             <Route path="/newDrink" exact component={Drink}></Route>
-            <Route path="/orderSuccess" exact component={OrderSuccess}></Route>
+            <Route path="/orderSuccess/:Table" exact component={OrderSuccess}></Route>
           </Switch>
         </Router>
       </Container>

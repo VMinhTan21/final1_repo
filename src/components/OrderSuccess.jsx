@@ -1,12 +1,14 @@
 import { useHistory } from "react-router-dom";
-import React, { useEffect, useState } from "react";
-import { Row, Col, Container, Button, Form, Table } from "react-bootstrap";
+import React from "react";
+import { Row, Col, Button } from "react-bootstrap";
+import { useParams } from "react-router-dom"
 
-const OrderSuccess = () => {
+const OrderSuccess = (props) => {
+    const { Table } = useParams()
     const history = useHistory()
 
     const handleOrderAgain = async (event) => {
-        history.push('/newOrder')
+        history.push(`/newOrder/${Table}`)
     }
 
     return (

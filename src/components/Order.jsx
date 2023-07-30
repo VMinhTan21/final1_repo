@@ -135,7 +135,7 @@ const Order = (req, res) => {
 
         socket.emit('NEW_ORDER', { table: Table })
 
-        history.push('/orderSuccess')
+        history.push(`/orderSuccess/${Table}`)
       } else {
         console.log(orderResponse.status);
       }
