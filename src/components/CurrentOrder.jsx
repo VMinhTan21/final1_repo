@@ -86,7 +86,6 @@ const CurrentOrder = (props) => {
                         marginTop: "3%",
                         marginBottom: "5%"
                     }}>{orders.Table}</h5>
-                    <h5>{orders.Status}</h5>
                     <h6 style={{
                         marginBottom: "0",
                         marginTop: "3%",
