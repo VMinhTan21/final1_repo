@@ -157,24 +157,24 @@ class Home extends Component {
                   }}>
                     <Card style={{ marginTop: "2%", backgroundColor: "#EFFFFF", border: "none" }}>
                       <Row style={{ marginTop: "5%" }}>
-                        <Col style={{ padding: "0px 10px" }}>
+                        <Col style={{ padding: "0px 15px" }}>
                           <SetGoal_2 />
                         </Col>
-                        <Col style={{ padding: "0px 10px" }}>
+                        <Col style={{ padding: "0px 15px" }}>
                           <SetGoal_3 />
                         </Col>
-                        <Col style={{ padding: "0px 10px" }}>
+                        <Col style={{ padding: "0px 15px" }}>
                           <SetGoal_4 />
                         </Col>
-                        <Col style={{ padding: "0px 10px" }}>
+                        <Col style={{ padding: "0px 15px" }}>
                           <SetGoal_5 />
                         </Col>
                       </Row>
                       <Row>
-                        <Col style={{ padding: "0px 10px" }}>
+                        <Col style={{ padding: "0px 15px" }}>
                           <SetGoal_1 />
                         </Col>
-                        <Col style={{ padding: "0px 10px" }}>
+                        <Col style={{ padding: "0px 15px" }}>
                           <Connection />
                         </Col>
                       </Row>

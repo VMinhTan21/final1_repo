@@ -89,7 +89,7 @@ class SetGoal_5 extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{ display: "inline" }}>
                 <Button onClick={this.sendCommand} variant="success"
                     style={{
                         position: "relative",

@@ -91,7 +91,7 @@ class SetGoal_2 extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{ display: "inline" }}>
                 <Button onClick={this.sendCommand} variant="success">
                     TABLE 1
                 </Button>
