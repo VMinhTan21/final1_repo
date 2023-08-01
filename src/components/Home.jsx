@@ -175,10 +175,10 @@ class Home extends Component {
                         <SetGoal_5 />
                       </Row> 
                       <Row>
-                        <Col style={{ padding: "0px 15px" }}>
+                        <Col style={{ padding: "0px 10px" }}>
                           <SetGoal_1 />
                         </Col>
-                        <Col style={{ padding: "0px 15px" }}>
+                        <Col style={{ padding: "0px 10px" }}>
                           <Connection />
                         </Col>
                         
