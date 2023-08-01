@@ -156,8 +156,8 @@ class Home extends Component {
                     transform: "translateX(-50%)"
                   }}>
                     <Card style={{ marginTop: "2%", backgroundColor: "#EFFFFF", border: "none" }}>
-                      <Row style={{ marginTop: "5%" }}>
-                        <Col style={{ padding: "0px 15px" }}>
+                      <Row style={{ marginTop: "5%", display: "flex" }} >
+                        {/* <Col style={{ padding: "0px 15px" }}>
                           <SetGoal_2 />
                         </Col>
                         <Col style={{ padding: "0px 15px" }}>
@@ -168,8 +168,12 @@ class Home extends Component {
                         </Col>
                         <Col style={{ padding: "0px 15px" }}>
                           <SetGoal_5 />
-                        </Col>
-                      </Row>
+                </Col>*/}
+                        <SetGoal_2 />
+                        <SetGoal_3 />
+                        <SetGoal_4 />
+                        <SetGoal_5 />
+                      </Row> 
                       <Row>
                         <Col style={{ padding: "0px 15px" }}>
                           <SetGoal_1 />
@@ -177,6 +181,7 @@ class Home extends Component {
                         <Col style={{ padding: "0px 15px" }}>
                           <Connection />
                         </Col>
+                        
                       </Row>
                     </Card>
                   </div>
